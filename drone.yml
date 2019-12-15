@@ -1,8 +1,0 @@
-kind: pipeline
-name: default
-
-steps:
-    - name: install
-      image: php
-      commands:
-          - composer install
