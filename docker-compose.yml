@@ -11,7 +11,7 @@ services:
     image: nginx:1.15.3-alpine
     restart: on-failure
     volumes:
-      - './apps/my-symfony-app/public/:/usr/src/app'
+      - './apps/my-symfony-app/public:/usr/src/app'
       - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
     ports:
       - 81:80
@@ -25,4 +25,3 @@ services:
     restart: on-failure
     env_file:
       - .env
-    user: 1000:1000
