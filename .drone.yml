@@ -1,9 +1,9 @@
 kind: pipeline
-type: docker
 name: default
+
 steps:
-    name: PSR2
-    image: herloct/phpcs
-    commands:
-        cp -r /drone/src/ /project
-        phpcs --standard=PSR1,PSR2 --ignore=/vendor/ .
+- name: PSR2
+  image: herloct/phpcs
+  commands:
+    - cp -r /drone/src/ /project
+    - phpcs --standard=PSR1,PSR2 --ignore=/vendor/ .
