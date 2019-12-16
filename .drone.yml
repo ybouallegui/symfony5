@@ -1,21 +1,13 @@
 kind: pipeline
-type: docker
 name: default
 
-clone:
-  disable: true
-
-
 steps:
-  - name: clone
-    image: alpine/git
+  - name: install
+    image: composer
     commands:
-      - git clone https://github.com/octocat/hello-world.git .
-      - git checkout $DRONE_COMMIT
+      - composer install
 
-  - name: build
-    image: golang
+  - name: test
+    image: php:7
     commands:
-      - go build
-      - go test
-    
+      - vendor/bin/phpunit --configuration config.xml
