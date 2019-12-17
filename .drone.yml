@@ -7,3 +7,4 @@ steps:
   commands:
     - cp -r /drone/src/ /project
     - phpcs --standard=PSR1,PSR2 --ignore=/vendor/ .
+
