@@ -9,14 +9,18 @@ name: default
 steps:
 - name: nginx
   image: nginx:1.15.3-alpine
+  commands:
+    - echo "zebbi on the top"
 #  volumes:
 #  - name: nginx-config-dir
 #    path: /etc/nginx/conf.d
 
 - name: php
-  image: php:7.2-fpm
-  settings:
-    dockerfile: docker/php/Dockerfile
+  image: php:7.3-fpm
+  commands:
+    - docker-php-ext-install pdo_mysql
+    - pecl install apcu
+    - 
   #volumes:
   #- name: project-dir
   #  path: /usr/src/app
