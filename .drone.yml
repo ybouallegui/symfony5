@@ -26,7 +26,8 @@ steps:
       from_secret: slack_webhook
 
   depends_on:
-  - default
+  - install
+  - test
   
 
 trigger:
