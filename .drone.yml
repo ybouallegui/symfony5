@@ -17,8 +17,8 @@ steps:
 
 - name: php
   image: plugins/docker
-#  settings:
- #   - dockerfile: /drone/src/docker/php/dockerfile
+  settings:
+    - dockerfile: docker/php/Dockerfile
 
 
   #volumes:
