@@ -7,6 +7,7 @@ steps:
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
+    - apps/my-symfony-app/composer install
   when:
     branch:
     - master
