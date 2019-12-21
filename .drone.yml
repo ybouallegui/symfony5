@@ -13,9 +13,13 @@ steps:
 
 - name: notify
   image: plugins/slack
+  commands:
+    - echo $${secrets }
+    - echo ${secrets}
+    - echo ${$secrets.slack_webhook}
   settings:
     webhook:
-      from_secret: ${{ secrets.slack_webhook }}
+      from_secret: $${ secrets.slack_webhook }
 
 trigger:
   branch:
