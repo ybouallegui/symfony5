@@ -16,7 +16,7 @@ steps:
   settings:
     repo: ybouallegui/symfony5
     webhook:
-      from_secret: slack_webhook
+      from_secret: $${ SLACK_WEBHOOK }
     channel: drone  
 
 trigger:
