@@ -1,10 +1,15 @@
 kind: pipeline
 name: default
-#type: kubernetes
+type: docker
 
+platform:
+  os: linux
+  arch: arm64
+  
 steps:
 - name: install
   image: nginx:1.15.3-alpine
+  dockerfile: docker/php/Dockerfile
   commands:
     - composer install 
 
