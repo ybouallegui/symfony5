@@ -53,7 +53,6 @@ volumes:
 - name: nginx-config-dir
   host:
     path: /docker/nginx
-
 #share workspace between pipeline
 #workspace:
 #  base: /
