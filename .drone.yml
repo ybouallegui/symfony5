@@ -9,6 +9,11 @@ steps:
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
 
+- name: notify
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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    
+
 trigger:
   branch:
   - master
