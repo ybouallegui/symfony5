@@ -8,7 +8,7 @@ steps:
   image: herloct/phpcs
   commands:
     - cp -r /drone/src/ /project/
-    - phpcs --standard=PSR1,PSR2 --ignore=/vendor/ --ignore=/app/config/ .
+    - phpcs --standard=PSR1,PSR2 --ignore=/vendor/ --extensions=php .
 
 trigger:
   branch:
