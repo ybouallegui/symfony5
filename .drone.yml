@@ -7,11 +7,22 @@ name: default
 #  arch: arm64
 
 steps:
-- name: install
+- name: nginx
   image: nginx:1.15.3-alpine
   dockerfile: docker/php/Dockerfile
+  volumes:
+  - name: cache
+    path: /tmp/cache
   commands:
     - composer install 
+
+- name: php
+  settings:
+    - dockerfile: docker/php/Dockerfile
+  volumes:
+  - name: project-dir
+    path: /usr/src/app
+  #environment:  
 
 - name: test
   image: herloct/phpcs
@@ -21,7 +32,8 @@ steps:
     branch:
     - master
   depends_on:
-  - install  
+  - nginx
+  - php  
 
 - name: notify
   image: plugins/slack
@@ -36,3 +48,16 @@ steps:
 trigger:
   branch:
   - master
+
+volumes:
+- name: project-dir
+  host:
+    path: ./apps/my-symfony-app
+- name: nginx-config-dir
+  host:
+    path: ./docker/nginx
+
+#share workspace between pipeline
+#workspace:
+#  base: /
+#  path: apps/my-symfony-app/ 
