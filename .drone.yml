@@ -3,11 +3,21 @@ name: default
 #type: kubernetes
 
 steps:
+- name: install project
+  commands:
+    - apt-get install docker docker-compose
+    - docker-compose up -d
+  #  - source $(dirname "$(realpath "$0")")/vendor/autoload.sh
+    - title "Rebuilding composer dependencies"
+ #   - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - docker-compose exec --user dev nginx composer install > /dev/null >&3
+    - success "Composer dependencies rebuilt successfully!" 
+   
+
 - name: PSR2
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
-    - apps/my-symfony-app/composer install
   when:
     branch:
     - master
