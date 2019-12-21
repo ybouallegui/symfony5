@@ -9,16 +9,16 @@ name: default
 steps:
 - name: nginx
   image: nginx:1.15.3-alpine
-  volumes:
-  - name: nginx-config-dir
-    path: /etc/nginx/conf.d
+#  volumes:
+#  - name: nginx-config-dir
+#    path: /etc/nginx/conf.d
 
 - name: php
   settings:
     dockerfile: docker/php/Dockerfile
-  volumes:
-  - name: project-dir
-    path: /usr/src/app
+  #volumes:
+  #- name: project-dir
+  #  path: /usr/src/app
   #environment:  
 
 - name: test
@@ -53,7 +53,7 @@ volumes:
 - name: nginx-config-dir
   host:
     path: /docker/nginx
-    
+
 #share workspace between pipeline
 #workspace:
 #  base: /
