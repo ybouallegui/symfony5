@@ -46,13 +46,13 @@ trigger:
   branch:
   - master
 
-volumes:
-- name: project-dir
-  host:
-    path: /drone/src
-- name: nginx-config-dir
-  host:
-    path: /drone/src
+#volumes:
+#- name: project-dir
+#  host:
+#    path: /drone/src
+#- name: nginx-config-dir
+#  host:
+#    path: /drone/src
 
 #share workspace between pipeline
 #workspace:
