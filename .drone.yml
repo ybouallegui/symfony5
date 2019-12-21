@@ -15,7 +15,7 @@ steps:
 - name: notify
   image: plugins/slack
   with: # Set the secret as an input
-      super_secret: ${{ secrets.SLACK_WEBHOOK }}
+    slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
   settings:
     webhook: 
       from_secret: slack_webhook
