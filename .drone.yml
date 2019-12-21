@@ -1,13 +1,13 @@
 kind: pipeline
 name: default
-type: kubernetes
+#type: kubernetes
 
 
 steps:
 - name: PSR2
   image: herloct/phpcs
   commands:
-    - phpcs --standard=PSR1,PSR2 --ignore=/drone/src/apps/my-symfony-app/config/*,/drone/src/apps/my-symfony-app/public  --extensions=php .
+    - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
 
 trigger:
   branch:
