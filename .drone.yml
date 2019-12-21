@@ -7,8 +7,7 @@ steps:
 - name: PSR2
   image: herloct/phpcs
   commands:
-    - cp -r /drone/src/ /project/
-    - phpcs --standard=PSR1,PSR2 --ignore=/apps/my-symfony-app/vendor/ --ignore=/apps/my-symfony-app/app/config/ --extensions=php .
+    - phpcs --standard=PSR1,PSR2 --ignore=/drone/src/apps/my-symfony-app/vendor/* --ignore=/drone/src/apps/my-symfony-app/config/* --extensions=php .
 
 trigger:
   branch:
