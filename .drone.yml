@@ -49,10 +49,10 @@ trigger:
 volumes:
 - name: project-dir
   host:
-    path: /apps/my-symfony-app
+    path: /drone/src
 - name: nginx-config-dir
   host:
-    path: /docker/nginx
+    path: /drone/src
 
 #share workspace between pipeline
 #workspace:
