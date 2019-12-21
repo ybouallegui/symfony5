@@ -17,15 +17,17 @@ steps:
     branch:
     - master
 
+steps:
 - name: notify
   image: plugins/slack
   settings:
     webhook:
       from_secret: slack_webhook
 
-  depends_on:
-  - install
-  - test    
+#  depends_on:
+#  - install
+#  - test
+  
 
 trigger:
   branch:
