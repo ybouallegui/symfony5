@@ -9,10 +9,12 @@ class HelloController
 {
     /**
      * @Route("/hello/{name}", methods={"GET","HEAD"})
+     * @param $name
+     *
+     * @return Response
      */
-    function hello($name)
+    public function hello($name)
     {
-        return new Response('<html><body>Hello: ' . $name . '</body></html>');
+        return new Response('<html><body>Hello: '.$name.'</body></html>');
     }
-
 }
