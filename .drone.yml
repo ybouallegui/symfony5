@@ -16,7 +16,7 @@ steps:
 #    path: /etc/nginx/conf.d
 
 - name: php
-  image: php:7.3-fpm
+  image: plugins/docker
   settings:
     - dockerfile: /drone/src/docker/php/dockerfile
 
