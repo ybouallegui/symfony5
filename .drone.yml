@@ -4,7 +4,7 @@ name: default
 
 platform:
   os: linux
-  arch: arm64
+  arch: amd64
 
 steps:
 - name: nginx
@@ -58,10 +58,15 @@ trigger:
   branch:
   - master
 
+services:
+- name: cache
+  image: redis
+
 #volumes:
 #- name: project-dir
 #  host:
 #    path: /drone/src
+
 #- name: nginx-config-dir
 #  host:
 #    path: /drone/src
