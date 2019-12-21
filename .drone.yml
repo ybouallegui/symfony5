@@ -22,10 +22,7 @@ steps:
     webhook:
       from_secret: slack_webhook
 
-  depends_on:
-  - install
-  - test
-  
+
 
 trigger:
   branch:
