@@ -3,13 +3,13 @@ name: default
 #type: kubernetes
 
 steps:
-- name: install project
+- name: install
   image: nginx:1.15.3-alpine
   commands:
     - composer install 
    
 
-- name: PSR2
+- name: test
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
@@ -22,6 +22,10 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
+
+  depends_on:
+  - install
+  - test    
 
 trigger:
   branch:
