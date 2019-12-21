@@ -7,9 +7,6 @@ steps:
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
-    - echo $${secrets }
-    - echo ${secrets}
-    - echo ${$secrets.slack_webhook}
   when:
     branch:
     - master
@@ -18,7 +15,7 @@ steps:
   image: plugins/slack
   settings:
     webhook:
-      from_secret: $${ secrets.slack_webhook }
+      from_secret: $${secrets.slack_webhook}
 
 trigger:
   branch:
