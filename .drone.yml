@@ -14,7 +14,7 @@ steps:
 - name: notify
   image: plugins/slack
   settings:
-    webhook: https://hooks.slack.com/services/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
+    webhook: https://hooks.slack.com/services/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
 
 trigger:
   branch:
