@@ -1,11 +1,11 @@
 kind: pipeline
 name: default
-type: docker
+#type: docker
 
 platform:
   os: linux
   arch: arm64
-  
+
 steps:
 - name: install
   image: nginx:1.15.3-alpine
