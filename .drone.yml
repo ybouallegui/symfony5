@@ -2,9 +2,9 @@ kind: pipeline
 name: default
 #type: docker
 
-platform:
-  os: linux
-  arch: arm64
+#platform:
+#  os: linux
+#  arch: arm64
 
 steps:
 - name: install
