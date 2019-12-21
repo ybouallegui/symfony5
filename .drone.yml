@@ -13,8 +13,11 @@ steps:
 
 - name: notify
   image: plugins/slack
+  environment:
   settings:
-    webhook: https://hooks.slack.com/services/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
+    webhook:
+      from_sercet: slack_webhook
+    channel: drone  
 
 trigger:
   branch:
