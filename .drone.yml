@@ -27,7 +27,6 @@ steps:
 
 depends_on:
   - install
-  - test
   
 
 trigger:
