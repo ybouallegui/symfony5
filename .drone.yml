@@ -14,6 +14,7 @@ steps:
 - name: notify
   image: plugins/slack
   settings:
+    repo: ybouallegui/symfony5
     webhook:
       from_secret: slack_webhook
     channel: drone  
