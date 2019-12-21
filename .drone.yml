@@ -4,14 +4,15 @@ name: default
 
 steps:
 - name: install project
+  image: nginx:1.15.3-alpine
   commands:
     - apt-get install docker docker-compose
     - docker-compose up -d
   #  - source $(dirname "$(realpath "$0")")/vendor/autoload.sh
-    - title "Rebuilding composer dependencies"
+  #  - title "Rebuilding composer dependencies"
  #   - cp app/config/parameters.yml.dist app/config/parameters.yml
-    - docker-compose exec --user dev nginx composer install > /dev/null >&3
-    - success "Composer dependencies rebuilt successfully!" 
+   # - docker-compose exec --user dev nginx composer install > /dev/null >&3
+   # - success "Composer dependencies rebuilt successfully!" 
    
 
 - name: PSR2
