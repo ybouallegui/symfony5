@@ -10,8 +10,8 @@ steps:
 - name: nginx
   image: nginx:1.15.3-alpine
   volumes:
-  - name: cache
-    path: /tmp/cache
+  - name: nginx-config-dir
+    path: /etc/nginx/conf.d
 
 - name: php
   settings:
