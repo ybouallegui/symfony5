@@ -16,9 +16,6 @@ steps:
     branch:
     - master
 
-kind: pipeline
-name: after
-steps:
 - name: notify
   image: plugins/slack
   settings:
