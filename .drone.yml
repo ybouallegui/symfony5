@@ -18,6 +18,7 @@ steps:
 - name: php
   image: php:7.2-fpm
   commands:
+    - echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
     - docker-php-ext-install pdo_mysql
     - pecl install apcu
     - apt-get update
