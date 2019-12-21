@@ -7,16 +7,15 @@ steps:
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --ignore=apps/my-symfony-app/config/*,apps/my-symfony-app/public  --extensions=php .
+    - echo $${secrets }
+    - echo ${secrets}
+    - echo ${$secrets.slack_webhook}
   when:
     branch:
     - master
 
 - name: notify
   image: plugins/slack
-  commands:
-    - echo $${secrets }
-    - echo ${secrets}
-    - echo ${$secrets.slack_webhook}
   settings:
     webhook:
       from_secret: $${ secrets.slack_webhook }
