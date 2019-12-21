@@ -1,10 +1,15 @@
 kind: pipeline
 name: default
+#type:
 
 
 steps:
 - name: PSR2
   image: herloct/phpcs
   commands:
-    - cp -r /drone/src/ /project
+    - cp -r /drone/src/ /project/src
     - phpcs --standard=PSR1,PSR2 --ignore=/vendor/ .
+
+trigger:
+  branch:
+  - master
