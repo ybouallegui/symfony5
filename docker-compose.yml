@@ -8,6 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: example
+    depends_on:
+      - php  
 
   nginx:
     image: nginx:1.15.3-alpine
