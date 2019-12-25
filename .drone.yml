@@ -9,7 +9,6 @@ platform:
 steps:
 - name: mysql
   image: mysql:5.7
-  commands:
   environment:
     MYSQL_ROOT_PASSWORD:
       from_secret: MYSQL_ROOT_PASSWORD
@@ -78,7 +77,5 @@ trigger:
 services:
 - name: cache
   image: redis
-- name : database
-  image: mysql
 - name: nginx
   image: nginx:1.15.3-alpine
