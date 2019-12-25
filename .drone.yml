@@ -44,7 +44,8 @@ steps:
     - cd apps/my-symfony-app
     - bin/console doctrine:database:create
   depends_on:
-  - php  
+  - php
+  - mysql
 
 - name: quality-test
   image: herloct/phpcs
@@ -58,7 +59,7 @@ steps:
     branch:
     - master
   depends_on:
-  - php  
+  - install
 
 - name: notify
   image: plugins/slack
