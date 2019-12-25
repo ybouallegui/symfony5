@@ -27,6 +27,8 @@ steps:
   commands:
     - cd apps/my-symfony-app
     - bin/console doctrine:database:create
+  depends_on:
+  - php  
 
 - name: quality-test
   image: herloct/phpcs
