@@ -7,7 +7,7 @@ platform:
   arch: amd64
 
 steps:
-- name: install
+- name: php
   image: php:7.2-fpm
   commands:
     - echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
@@ -22,15 +22,26 @@ steps:
     - composer install
     - bin/console ca:cl
 
-- name: test
+- name: install
+  image: php
+  commands:
+    - cd apps/my-symfony-app
+    - bin/console doctrine:database:create
+    - 
+
+- name: quality-test
   image: herloct/phpcs
   commands:
     - phpcs --standard=PSR1,PSR2 --extensions=php ./apps/my-symfony-app/src
+    - cd apps/my-symfony-app
+    - bin/console lint:twig 
+    - bin/console lint:xliff
+    - bin/console lint:yaml 
   when:
     branch:
     - master
   depends_on:
-  - install  
+  - php  
 
 - name: notify
   image: plugins/slack
