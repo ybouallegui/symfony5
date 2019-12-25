@@ -34,15 +34,6 @@ steps:
     - composer install
     - bin/console ca:cl
   environment:
-    MYSQL_ROOT_PASSWORD: root
-      from_secret: DATABASE_URL
-    MYSQL_DATABASE: symfony
-      from_secret: DATABASE_URL
-    MYSQL_USER: symfony
-      from_secret: DATABASE_URL
-    MYSQL_PASSWORD: symfony
-      from_secret: DATABASE_URL
-
     DATABASE_URL:
       from_secret: DATABASE_URL
     APP_ENV: 'dev'
