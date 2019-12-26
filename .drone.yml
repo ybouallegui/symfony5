@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: database
-  image: database
+  image: db
   commands:
   - sleep 15
   - mysql -u root -h database
@@ -65,7 +65,7 @@ steps:
   
 
 services:
-- name: database
+- name: db
   image: mysql:5.7
   ports:
   - 3306
