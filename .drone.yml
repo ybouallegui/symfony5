@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: php
-  image: php:7.3-fpm
+  image: php:7.2-fpm
   commands:
     - echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
     - docker-php-ext-install pdo_mysql
@@ -21,18 +21,11 @@ steps:
     - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \ && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'baf1608c33254d00611ac1705c1d9958c817a1a33bce370c0595974b342601bd80b92a3f46067da89e3b06bff421f182') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \ && php composer-setup.php --filename=composer \ && php -r "unlink('composer-setup.php');" \ && mv composer /usr/local/bin/composer
     - composer install
     - bin/console ca:cl
+    - bin/console doctrine:database:create
   environment:
     DATABASE_URL:
       from_secret: DATABASE_URL
     APP_ENV: 'dev'
-
-- name: install
-  image: php:7.3-fpm
-  commands:
-    - cd apps/my-symfony-app
-    - bin/console doctrine:database:create
-  depends_on:
-  - php
 
 - name: quality-test
   image: herloct/phpcs
