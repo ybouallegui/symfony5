@@ -48,6 +48,9 @@ steps:
   - quality-test
   when:
     status: [ success, failure ]
+    event:
+    include:
+    - pull_request
   
 services:
 - name: mysql
