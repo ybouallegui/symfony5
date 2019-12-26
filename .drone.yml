@@ -9,7 +9,7 @@ platform:
 steps:
 - name: install
   image: php:7.2-fpm
-  settings:
+  build:
     dockerfile: docker/php/Dockerfile
   commands:
   #   - echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
