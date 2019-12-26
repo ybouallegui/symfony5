@@ -7,6 +7,12 @@ platform:
   arch: amd64
 
 steps:
+- name: database
+  image: database
+  commands:
+  - sleep 15
+  - mysql -u root -h database
+
 - name: php
   image: php:7.2-fpm
   commands:
@@ -33,7 +39,7 @@ steps:
     - bin/console doctrine:database:create
   depends_on:
   - php
-  - database
+  - db
 
 - name: quality-test
   image: herloct/phpcs
