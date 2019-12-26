@@ -51,6 +51,12 @@ steps:
     event:
     include:
     - pull_request
+  template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}  
 
 - name: notify-PR
   image: plugins/slack
@@ -61,6 +67,9 @@ steps:
     event:
     include:
     - pull_request
+  template: >
+        New PR {{build.number}} has been created. think to review plz.
+
 
 services:
 - name: mysql
