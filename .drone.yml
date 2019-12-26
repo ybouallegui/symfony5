@@ -47,9 +47,9 @@ steps:
     link_names: true  
     template: >
       {{#success build.status}}
-        build {{build.number}} succeeded. Good job.
+        build:{{build.number}} succeeded {{build.link}}. Good job.
       {{else}}
-        build {{build.number}} failed. Fix me please.
+        build: {{build.number}} failed {{build.link}}. Fix me please.
       {{/success}}  
   depends_on:
   - quality-test
@@ -66,7 +66,7 @@ steps:
       from_secret: slack_webhook
     link_names: true    
     template: >
-      New PR ({{build.pull}}) has been created by ({{build.author}}) building on: {{build.link}}. think to review plz.    
+      PR ({{build.pull}}) has been created or Updated by ({{build.author}}) building on: {{build.link}}. think to review plz.    
   when:
     event:
     include:
