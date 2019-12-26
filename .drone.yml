@@ -39,7 +39,7 @@ steps:
     - bin/console doctrine:database:create
   depends_on:
   - php
-  - db
+  - database
 
 - name: quality-test
   image: herloct/phpcs
