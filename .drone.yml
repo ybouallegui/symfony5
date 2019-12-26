@@ -33,9 +33,9 @@ steps:
   commands:
     #- phpcs --standard=PSR1,PSR2 --extensions=php ./apps/my-symfony-app/src
     - cd apps/my-symfony-app
-    - bin/console lint:twig 
-    - bin/console lint:xliff
-    - bin/console lint:yaml 
+    - bin/console lint:twig src
+    - bin/console lint:xliff src
+    - bin/console lint:yaml config src
   when:
     branch:
     - master
