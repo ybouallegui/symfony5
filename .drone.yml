@@ -21,7 +21,7 @@ steps:
     - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \ && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'baf1608c33254d00611ac1705c1d9958c817a1a33bce370c0595974b342601bd80b92a3f46067da89e3b06bff421f182') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \ && php composer-setup.php --filename=composer \ && php -r "unlink('composer-setup.php');" \ && mv composer /usr/local/bin/composer
     - composer install
     - bin/console ca:cl
-    - bin/console doctrine:database:drop --force
+    - bin/console doctrine:database:drop --force --if-exists --env=dev
     - bin/console doctrine:database:create
   environment:
     DATABASE_URL:
@@ -36,9 +36,6 @@ steps:
     - bin/console lint:twig src
     - bin/console lint:xliff src
     - bin/console lint:yaml config src
-  when:
-    branch:
-    - master
   depends_on:
   - install
 
@@ -47,11 +44,33 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
+    link_names: true  
+    template: >
+      {{#success build.status}}
+        build:{{build.number}} succeeded {{build.link}}. Good job.
+      {{else}}
+        build: {{build.number}} failed {{build.link}}. Fix me please.
+      {{/success}}  
   depends_on:
   - quality-test
   when:
     status: [ success, failure ]
-  
+    event:
+    include:
+    - pull_request
+
+- name: notify-PR
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+    link_names: true    
+    template: >
+      PR ({{build.pull}}) has been created or Updated by ({{build.author}}) building on: {{build.link}}. think to review plz.    
+  when:
+    event:
+    include:
+    - pull_request
 
 services:
 - name: mysql
@@ -69,10 +88,6 @@ services:
       from_secret: MYSQL_PASSWORD
 
 trigger:
-  branch:
-    exclude:
-    - master
   event:
     include:
-    - push
     - pull_request
