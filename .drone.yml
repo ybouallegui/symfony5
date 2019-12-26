@@ -29,9 +29,9 @@ steps:
     APP_ENV: 'dev'
 
 - name: quality-test
-  image: herloct/phpcs
+  image: php:7.2-fpm
   commands:
-    - phpcs --standard=PSR1,PSR2 --extensions=php ./apps/my-symfony-app/src
+    #- phpcs --standard=PSR1,PSR2 --extensions=php ./apps/my-symfony-app/src
     - cd apps/my-symfony-app
     - bin/console lint:twig 
     - bin/console lint:xliff
