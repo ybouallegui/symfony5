@@ -44,6 +44,12 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}  
   depends_on:
   - quality-test
   when:
@@ -51,25 +57,19 @@ steps:
     event:
     include:
     - pull_request
-  template: >
-      {{#success build.status}}
-        build {{build.number}} succeeded. Good job.
-      {{else}}
-        build {{build.number}} failed. Fix me please.
-      {{/success}}  
+  
 
 - name: notify-PR
   image: plugins/slack
   settings:
     webhook:
       from_secret: slack_webhook
+  template: >
+        New PR {{build.number}} has been created. think to review plz.    
   when:
     event:
     include:
     - pull_request
-  template: >
-        New PR {{build.number}} has been created. think to review plz.
-
 
 services:
 - name: mysql
