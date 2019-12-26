@@ -65,9 +65,9 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
-  link_names: true    
-  template: >
-        New PR {{build.pull}} has been created by {{build.author}} builded on {{build.link}}. think to review plz.    
+    link_names: true    
+    template: >
+      New PR ({{build.pull}}) has been created by ({{build.author}}) building on: {{build.link}}. think to review plz.    
   when:
     event:
     include:
