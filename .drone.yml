@@ -36,9 +36,6 @@ steps:
     - bin/console lint:twig src
     - bin/console lint:xliff src
     - bin/console lint:yaml config src
-  when:
-    branch:
-    - master
   depends_on:
   - install
 
@@ -74,5 +71,4 @@ trigger:
     - master
   event:
     include:
-    - push
     - pull_request
