@@ -68,7 +68,7 @@ steps:
       from_secret: slack_webhook
     link_names: true    
     template: >
-      PR ({{build.pull}}) has been created or Updated by ({{build.author}}) building on: {{build.link}}. think to review plz.    
+      {{build.link}} New Build has been started on ({{build.branch}}) created by ({{build.author}}). think to to review after build success.
   when:
     event:
     include:
