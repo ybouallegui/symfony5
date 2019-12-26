@@ -44,6 +44,7 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
+    link_names: true  
     template: >
       {{#success build.status}}
         build {{build.number}} succeeded. Good job.
@@ -64,8 +65,9 @@ steps:
   settings:
     webhook:
       from_secret: slack_webhook
+  link_names: true    
   template: >
-        New PR {{build.number}} has been created. think to review plz.    
+        New PR {{build.pull}} has been created by {{build.author}} builded on {{build.link}}. think to review plz.    
   when:
     event:
     include:
