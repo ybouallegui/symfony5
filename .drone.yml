@@ -68,7 +68,7 @@ steps:
       from_secret: slack_webhook
     link_names: true    
     template: >
-      {{build.link}} New Build has been started on ({{build.branch}}) created by ({{build.author}}). think to to review after build success.
+      {{build.link}} New Build has been started, created by ({{build.author}}). think to review after build success.
   when:
     event:
     include:
