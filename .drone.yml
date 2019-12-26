@@ -39,7 +39,7 @@ steps:
     branch:
     - master
   depends_on:
-  - install
+  - php
 
 - name: notify
   image: plugins/slack
