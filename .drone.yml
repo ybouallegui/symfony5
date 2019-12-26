@@ -58,7 +58,6 @@ steps:
     event:
     include:
     - pull_request
-  
 
 - name: notify-PR
   image: plugins/slack
