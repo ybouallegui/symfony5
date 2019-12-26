@@ -51,7 +51,17 @@ steps:
     event:
     include:
     - pull_request
-  
+
+- name: notify-PR
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+  when:
+    event:
+    include:
+    - pull_request
+
 services:
 - name: mysql
   image: mysql:5.7
