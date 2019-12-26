@@ -8,7 +8,7 @@ platform:
 
 steps:
 - name: php
-  image: php:7.2-fpm
+  image: php:7.3-fpm
   commands:
     - echo 'memory_limit = 512M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
     - docker-php-ext-install pdo_mysql
@@ -27,7 +27,7 @@ steps:
     APP_ENV: 'dev'
 
 - name: install
-  image: php
+  image: php:7.3-fpm
   commands:
     - cd apps/my-symfony-app
     - bin/console doctrine:database:create
