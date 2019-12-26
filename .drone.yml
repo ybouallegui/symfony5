@@ -59,7 +59,7 @@ steps:
     include:
     - pull_request
 
-- name: notify-PR
+- name: notify-start
   image: plugins/slack
   settings:
     webhook:
@@ -67,10 +67,6 @@ steps:
     link_names: true    
     template: >
       {{build.link}} New Build has been started, created by ({{build.author}}). think to review after build success.
-  when:
-    event:
-    include:
-    - pull_request
 
 
 services:
