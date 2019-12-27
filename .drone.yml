@@ -21,7 +21,7 @@ steps:
     - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \ && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'baf1608c33254d00611ac1705c1d9958c817a1a33bce370c0595974b342601bd80b92a3f46067da89e3b06bff421f182') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \ && php composer-setup.php --filename=composer \ && php -r "unlink('composer-setup.php');" \ && mv composer /usr/local/bin/composer
     - composer install
     - bin/console ca:cl
-    - bin/console doctrine:database:drop --force --if-exists --env=dev
+    - bin/console doctrine:database:drop --force
     - bin/console doctrine:database:create
   environment:
     DATABASE_URL:
@@ -39,7 +39,18 @@ steps:
   depends_on:
   - install
 
-- name: notify
+- name: notify-start
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_webhook
+    link_names: true    
+    template: >
+      {{build.link}} New Build has been started, created by ({{build.author}}). think to review after build success.
+  when:
+    status: [ success, failure ]     
+    
+- name: notify-end
   image: plugins/slack
   settings:
     webhook:
@@ -55,22 +66,6 @@ steps:
   - quality-test
   when:
     status: [ success, failure ]
-    event:
-    include:
-    - pull_request
-
-- name: notify-PR
-  image: plugins/slack
-  settings:
-    webhook:
-      from_secret: slack_webhook
-    link_names: true    
-    template: >
-      PR ({{build.pull}}) has been created or Updated by ({{build.author}}) building on: {{build.link}}. think to review plz.    
-  when:
-    event:
-    include:
-    - pull_request
 
 services:
 - name: mysql
@@ -91,3 +86,30 @@ trigger:
   event:
     include:
     - pull_request
+
+# kind: pipeline
+# type: kubernetes
+# name: default
+
+# steps:
+# - name: greeting
+#   image: golang:1.12
+#   commands:
+#   - go build
+#   - go test
+
+---
+kind: pipeline
+type: exec
+name: deploy integration
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: greeting
+  commands:
+  - echo hello world
+  depends_on:
+  - build-for-test
